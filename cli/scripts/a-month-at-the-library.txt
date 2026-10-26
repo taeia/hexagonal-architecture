@@ -1,0 +1,27 @@
+# A month at the library, the last scenario of Chapter 0, as a script for the command line.
+# Run it from the root of the repository:
+#   mvn -pl cli exec:java -Dexec.args=cli/scripts/a-month-at-the-library.txt
+day 2 March
+borrow John C1
+borrow Jane C2
+day 4 March
+borrow Mary C1
+reserve Mary The Hobbit
+day 10 March
+renew C1
+day 12 March
+renew C2
+day 16 March
+return C1
+day 17 March
+borrow Jane C1
+borrow Mary C1
+reservations
+day 2 April
+return C2
+borrow Jane C4
+day 3 April
+pay Jane
+borrow Jane C4
+return C1
+members

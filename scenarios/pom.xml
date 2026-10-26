@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>domain-centric-architecture</groupId>
+        <artifactId>hexagonal-architecture</artifactId>
+        <version>1.0</version>
+    </parent>
+
+    <artifactId>scenarios</artifactId>
+
+    <!-- The third driving adapter: the scenario tests. Cockburn's reason for the
+         hexagon was that an application should be driven equally by a user and by a
+         test, so the tests get a module of their own, with the same two dependencies
+         as the other drivers. It has no main code. In Chapter 6 this test lived in the
+         application module with the infrastructure in test scope; the core's tests
+         cannot depend on an adapter that depends on the core, so the test moved out. -->
+    <dependencies>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>inmemory</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+</project>

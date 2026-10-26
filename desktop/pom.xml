@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>domain-centric-architecture</groupId>
+        <artifactId>hexagonal-architecture</artifactId>
+        <version>1.0</version>
+    </parent>
+
+    <artifactId>desktop</artifactId>
+
+    <!-- A driving adapter: the JavaFX window. It depends on the core for the driving
+         ports it calls and for the domain objects that travel to the screen, and on
+         the in-memory adapters because its entry point is the configurator for this
+         program: it chooses the storage, the clock, and the mailbox, and loads the
+         starting state. Nothing else in this module names an adapter. -->
+    <dependencies>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>inmemory</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-controls</artifactId>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.openjfx</groupId>
+                <artifactId>javafx-maven-plugin</artifactId>
+                <configuration>
+                    <mainClass>library.desktop.MainWindow</mainClass>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>
