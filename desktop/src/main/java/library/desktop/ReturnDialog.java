@@ -10,9 +10,9 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import library.ports.driving.ForLendingCopies;
 import library.domain.Copy;
 import library.domain.Loan;
+import library.ports.driving.ForLendingCopies;
 
 public class ReturnDialog extends Stage {
 

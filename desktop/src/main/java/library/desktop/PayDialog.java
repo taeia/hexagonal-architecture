@@ -10,10 +10,10 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import library.ports.driving.ForPayingFines;
 import library.domain.LibraryException;
 import library.domain.Member;
 import library.domain.Money;
+import library.ports.driving.ForPayingFines;
 
 public class PayDialog extends Stage {
 

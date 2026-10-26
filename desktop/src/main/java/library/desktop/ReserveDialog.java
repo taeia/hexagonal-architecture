@@ -10,11 +10,11 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import library.ports.driving.ForPayingFines;
-import library.ports.driving.ForReservingBooks;
 import library.domain.Book;
 import library.domain.LibraryException;
 import library.domain.Member;
+import library.ports.driving.ForPayingFines;
+import library.ports.driving.ForReservingBooks;
 
 public class ReserveDialog extends Stage {
 

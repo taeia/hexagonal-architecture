@@ -8,7 +8,9 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeFormatterBuilder;
 import java.time.format.DateTimeParseException;
+import java.time.format.ResolverStyle;
 import java.util.Locale;
 
 import library.application.LoanService;
@@ -42,12 +44,16 @@ import library.ports.driving.ForReservingBooks;
  * {@code return C1}, {@code renew C1}, {@code reserve Mary The Hobbit}, and
  * {@code pay Jane} are the five operations. {@code copies}, {@code members}, and
  * {@code reservations} show the library, {@code reset} puts it back in its starting
- * state, and {@code quit} ends the session.
+ * state, and {@code quit} ends the session. Dates are in 2026, the year of the scenarios.
  */
 public class Cli {
 
     private static final DateTimeFormatter DAY = DateTimeFormatter.ofPattern("d MMMM", Locale.ENGLISH);
-    private static final DateTimeFormatter DAY_WITH_YEAR = DateTimeFormatter.ofPattern("d MMMM yyyy", Locale.ENGLISH);
+    private static final DateTimeFormatter DAY_WITH_YEAR = new DateTimeFormatterBuilder()
+            .parseCaseInsensitive()
+            .appendPattern("d MMMM uuuu")
+            .toFormatter(Locale.ENGLISH)
+            .withResolverStyle(ResolverStyle.STRICT);
 
     private final ForLendingCopies lending;
     private final ForReservingBooks reserving;
@@ -116,10 +122,10 @@ public class Cli {
                 if (echo) {
                     out.println("> " + line);
                 }
+                out.println(execute(line));
                 if (line.equals("quit")) {
                     return;
                 }
-                out.println(execute(line));
             }
             if (!echo) {
                 out.print("> ");
@@ -133,7 +139,7 @@ public class Cli {
     public String execute(String line) {
         String[] words = line.strip().split("\\s+", 2);
         String command = words[0];
-        String rest = words.length > 1 ? words[1].strip() : "";
+        String rest = words.length > 1 ? words[1].strip().replaceAll("\\s+", " ") : "";
         try {
             return switch (command) {
                 case "day" -> day(rest);
@@ -147,6 +153,7 @@ public class Cli {
                 case "reservations" -> reservations();
                 case "reset" -> reset();
                 case "help" -> help();
+                case "quit" -> "Goodbye.";
                 default -> "Unknown command: " + command + ". Type help.";
             };
         } catch (LibraryException e) {
@@ -265,7 +272,7 @@ public class Cli {
 
     private String help() {
         return """
-                day 2 March              set the date
+                day 2 March              set the date (the year is 2026)
                 borrow John C1           a member borrows a copy
                 return C1                a copy comes back
                 renew C1                 the loan of a copy is renewed

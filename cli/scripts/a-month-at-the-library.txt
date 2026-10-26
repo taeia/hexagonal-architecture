@@ -1,6 +1,6 @@
 # A month at the library, the last scenario of Chapter 0, as a script for the command line.
 # Run it from the root of the repository:
-#   mvn -pl cli exec:java -Dexec.args=cli/scripts/a-month-at-the-library.txt
+#   mvn -q -pl cli exec:java -Dexec.args=cli/scripts/a-month-at-the-library.txt
 day 2 March
 borrow John C1
 borrow Jane C2

@@ -12,12 +12,12 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import library.ports.driving.ForLendingCopies;
-import library.ports.driving.ForPayingFines;
 import library.domain.Copy;
 import library.domain.LibraryException;
 import library.domain.Loan;
 import library.domain.Member;
+import library.ports.driving.ForLendingCopies;
+import library.ports.driving.ForPayingFines;
 
 public class BorrowDialog extends Stage {
 

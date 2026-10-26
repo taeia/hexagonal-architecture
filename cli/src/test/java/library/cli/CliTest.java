@@ -7,6 +7,7 @@ import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.PrintStream;
+import java.io.StringReader;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -79,8 +80,14 @@ class CliTest {
 
     @Test
     void theDayMovesTheClock() {
-        assertEquals("It is 18 March.", cli.execute("day 18 March"));
+        assertEquals("It is 18 March.", cli.execute("day 18 march"));
         assertEquals("Jane borrowed C3 of Pride and Prejudice. It is due on 1 April.", cli.execute("borrow Jane C3"));
+    }
+
+    @Test
+    void quitSaysGoodbyeAndStopsReading() throws IOException {
+        cli.run(new BufferedReader(new StringReader("day 2 March\nquit\nborrow John C1\n")), false);
+        assertEquals(List.of("> It is 2 March.", "> Goodbye."), printed());
     }
 
     @Test
@@ -91,6 +98,7 @@ class CliTest {
         assertEquals("C1 is not on loan.", cli.execute("return C1"));
         assertEquals("Write it as in \"borrow John C1\".", cli.execute("borrow John"));
         assertEquals("Write the day as in \"day 2 March\".", cli.execute("day tomorrow"));
+        assertEquals("Write the day as in \"day 2 March\".", cli.execute("day 31 February"));
     }
 
     @Test
@@ -100,11 +108,21 @@ class CliTest {
         }
         List<String> lines = printed();
 
-        assertTrue(lines.contains("John borrowed C1 of The Hobbit. It is due on 16 March."));
+        assertEquals(List.of(
+                "> day 16 March",
+                "It is 16 March.",
+                "> return C1",
+                "Notification for Mary: The Hobbit is waiting for you.",
+                "John returned C1 on time. C1 is on hold for Mary, who has been notified.",
+                "> day 17 March",
+                "It is 17 March.",
+                "> borrow Jane C1",
+                "The library refuses. C1 is on hold for Mary.",
+                "> borrow Mary C1",
+                "Mary borrowed C1 of The Hobbit. It is due on 31 March."),
+                lines.subList(lines.indexOf("> day 16 March"), lines.indexOf("> reservations")));
         assertTrue(lines.contains("The library refuses. The Hobbit is reserved."));
         assertTrue(lines.contains("Jane renewed the loan of C2. It is now due on 30 March."));
-        assertTrue(lines.contains("Notification for Mary: The Hobbit is waiting for you."));
-        assertTrue(lines.contains("The library refuses. C1 is on hold for Mary."));
         assertTrue(lines.contains("Jane returned C2 3 days late and now owes 1.50 EUR."));
         assertTrue(lines.contains("Jane paid 1.50 EUR and owes nothing now."));
         assertEquals("Mary: 0 loans, owes 1.50 EUR", lines.get(lines.size() - 1));
