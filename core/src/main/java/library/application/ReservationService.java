@@ -13,9 +13,9 @@ import library.ports.driven.QueueRepository;
 import library.ports.driving.ForReservingBooks;
 
 /**
- * Reserving. An application service: it asks {@link Reserving} to do the work and
- * reads the position back. Also the questions the screens ask about books and
- * reservations.
+ * Reserving. An application service, and the class behind the {@link ForReservingBooks}
+ * port: it asks {@link Reserving} to do the work and reads the position back. Also the
+ * questions the drivers ask about books and reservations.
  */
 public class ReservationService implements ForReservingBooks {
 

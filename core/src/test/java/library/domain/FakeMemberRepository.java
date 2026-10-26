@@ -6,8 +6,8 @@ import java.util.List;
 import library.ports.driven.MemberRepository;
 
 /**
- * A member repository for the tests of this module. The domain declares the interface,
- * so a test can implement it in a few lines without seeing the infrastructure module.
+ * A member repository for the tests of this module. The core declares the port, so a
+ * test can implement it in a few lines without seeing any adapter module.
  * It holds the members it was given, and separately remembers what was saved, so a
  * test can check that a changed root was.
  */

@@ -8,9 +8,10 @@ import library.ports.driven.MemberRepository;
 import library.ports.driving.ForPayingFines;
 
 /**
- * Paying fines. An application service: the member knows how to pay, and paying
- * touches one aggregate, so no domain service is needed; this class saves the result.
- * Also the questions the screens ask about members.
+ * Paying fines. An application service, and the class behind the {@link ForPayingFines}
+ * port: the member knows how to pay, and paying touches one aggregate, so no domain
+ * service is needed; this class saves the result. Also the list of members, which every
+ * driver asks for.
  */
 public class MemberService implements ForPayingFines {
 

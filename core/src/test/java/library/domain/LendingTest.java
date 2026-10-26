@@ -11,9 +11,9 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 
 /**
- * The operations that cross aggregates, tested without the infrastructure module. The
+ * The operations that cross aggregates, tested without any adapter module. The
  * repositories and the clock are the fakes in this directory, built on the interfaces
- * the domain declares. The clock belongs to this test and to no other.
+ * the core declares as driven ports. The clock belongs to this test and to no other.
  */
 class LendingTest {
 

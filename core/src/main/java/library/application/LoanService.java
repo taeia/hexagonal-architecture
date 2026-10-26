@@ -13,10 +13,11 @@ import library.ports.driven.Notifier;
 import library.ports.driving.ForLendingCopies;
 
 /**
- * Borrowing, returning, and renewing. An application service: it asks {@link Lending}
- * to do the work and sends the notification through the {@link Notifier} the domain
- * declares. The rules are in the aggregates, and the saving is done by the domain
- * service that changed them. Also the questions the screens ask about loans and copies.
+ * Borrowing, returning, and renewing. An application service, and the class behind the
+ * {@link ForLendingCopies} port: it asks {@link Lending} to do the work and sends the
+ * notification through the {@link Notifier} port. The rules are in the aggregates, and
+ * the saving is done by the domain service that changed them. Also the questions the
+ * drivers ask about loans and copies.
  */
 public class LoanService implements ForLendingCopies {
 
